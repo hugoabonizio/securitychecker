@@ -1,0 +1,19 @@
+extends layout
+
+block content
+  h3.
+    #[i(class='fa fa-circle-o-notch fa-spin green')]
+    Checking #[span(class='green') !{domain}]
+  br
+  ul(class='fa-ul')
+    li
+      i(class='fa-li fa fa-check-square' style='color:green')
+      = 'Is the website only served over https?'
+      br
+      br
+      em Test:
+      pre.
+        $ curl -s -I http://example.org | grep '^HTTP'
+        HTTP/1.1 301 Moved Permanently
+        $ curl -s -I https://example.org | grep '^HTTP'
+        HTTP/1.1 200 OK
