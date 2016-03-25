@@ -1,6 +1,10 @@
 extends layout
 
 block content
+  if sessionFlash && sessionFlash.message
+    div(class='alert alert-danger', role='alert')
+      span(class='glyphicon glyphicon-exclamation-sign', aria-hidden='true') #{sessionFlash.message}
+
   form(action='/check', method='get')
     input(name='domain')
     button Check!
