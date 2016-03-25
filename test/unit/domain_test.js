@@ -22,8 +22,9 @@ describe('Domain extractor', function () {
   });
   
   it('should fail with invalid domains', function () {
-    var extracted = domain('sdfsdf.fdsjsoidf d er');
-    console.log(extracted);
-    expect(extracted).to.equal(false);
+    expect(domain('sdfsdf.fdsjsoidf d er')).to.equal(false);
+    expect(domain('hdsfhsf sdfs dfhsd fsu')).to.equal(false);
+    expect(domain('')).to.equal(false);
+    expect(domain(undefined)).to.equal(false);
   });
 });
