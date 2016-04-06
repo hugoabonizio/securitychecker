@@ -26,13 +26,12 @@ router.post('/check', function (req, res, next) {
   var test_index = req.body.test;
   var check_domain = domain(url);
   if (check_domain) {
-    
     checker(test_index, url, function (err, results) {
-      if (err) res.status(401).send(err).end();
+      if (err) res.sendStatus(401);
       res.json(results);
     });
   } else {
-    res.status(400).end();
+    res.sendStatus(400);
   }
 });
 
