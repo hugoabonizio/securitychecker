@@ -4,27 +4,45 @@ var Checklist = (function () {
   
   return {
     run: function (url) {
-      
+      var self = this;
       this.fetch(url, current++, function (err, data) {
         if (!stop) {
           if (err) {
             stop = true;
             document.body.innerHTML += '<h1>FIM</h1>';
           } else {
-            data.results.forEach(function (result) {
-              document.body.innerHTML += '<h2>' + result.output + '</h2>';
-            });
+            self.append(data.description, data.results);
             Checklist.run(url);
           }
         }
       });
     },
-    
     fetch: function (url, i, callback) {
       $
         .post('/check', { url: url, test: i })
         .done(function (results) { callback(null, results); })
         .fail(function (err) { console.log(err.status); callback(err.status, null); });
+    },
+    append: function (description, results) {
+      console.log(results);
+      // Iterate over results adding 0 + (false|true) and will
+      // result in 0 if all values are false, and 1+ if exists
+      // any true value
+      var icon, color;
+      if (results.reduce(function (prev, curr) { return prev + curr.result }, 0)) {
+        icon = 'fa-check-square';
+        color = 'green';
+      } else {
+        icon = 'fa-minus-square';
+        color = 'red';
+      }
+      var element = "<br><li><i class='fa-li fa " + icon + "' style='color:" + color + "'></i> " + description + "<br><br><em>Test:</em><pre>\n";
+      results.forEach(function (result) {
+        console.log(result);
+        element += "\n$ " + result.command + "\n" + result.output;
+      });
+      element += "\n</pre></li>";
+      document.getElementById('results').innerHTML += element;
     }
   };
 })();
