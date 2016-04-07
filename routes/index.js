@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var domain = require('../lib/domain');
 var checker = require('../lib/checker');
+var list = require('../lib/list');
 
 router.get('/', function (req, res, next) {
   res.render('index');
@@ -24,14 +25,19 @@ router.get('/check', function (req, res, next) {
 router.post('/check', function (req, res, next) {
   var url = req.body.url;
   var test_index = req.body.test;
-  var check_domain = domain(url);
-  if (check_domain) {
-    checker(test_index, url, function (err, results) {
-      if (err) res.sendStatus(401);
-      res.json(results);
-    });
+  if (test_index in list) {
+    var test_obj = list[test_index];
+    var check_domain = domain(url);
+    if (check_domain) {
+      checker(test_index, url, function (err, results) {
+        if (err) res.sendStatus(400);
+        res.json({ description: test_obj.description, results: results });
+      });
+    } else {
+      res.sendStatus(400);
+    }
   } else {
-    res.sendStatus(400);
+    res.sendStatus(404);
   }
 });
 

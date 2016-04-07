@@ -4,15 +4,14 @@ var Checklist = (function () {
   
   return {
     run: function (url) {
-      console.log(stop);
       
-      this.fetch(url, current++, function (err, results) {
+      this.fetch(url, current++, function (err, data) {
         if (!stop) {
           if (err) {
             stop = true;
-            document.body.innerHTML += '<h1>CARAI</h1>';
+            document.body.innerHTML += '<h1>FIM</h1>';
           } else {
-            results.forEach(function (result) {
+            data.results.forEach(function (result) {
               document.body.innerHTML += '<h2>' + result.output + '</h2>';
             });
             Checklist.run(url);
@@ -25,7 +24,7 @@ var Checklist = (function () {
       $
         .post('/check', { url: url, test: i })
         .done(function (results) { callback(null, results); })
-        .fail(function () { console.log('deu merda no ' + i); callback(true, null); });
+        .fail(function (err) { console.log(err.status); callback(err.status, null); });
     }
   };
 })();
