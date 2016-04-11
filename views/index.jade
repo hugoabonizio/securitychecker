@@ -4,7 +4,12 @@ block content
   if sessionFlash && sessionFlash.message
     div(class='alert alert-danger', role='alert')
       span(class='glyphicon glyphicon-exclamation-sign', aria-hidden='true') #{sessionFlash.message}
-
-  form(action='/check', method='get')
-    input(name='domain')
-    button Check!
+  
+  div(class='row')
+    div(class='col-md-6 col-md-offset-3')
+      form(action='/check', method='get')
+        div(class='input-group')
+          input(name='video_url' class='form-control input-lg' type='text' placeholder='Enter a domain...' autofocus)
+          span(class='input-group-btn')
+            button(class='btn btn-success btn-add btn-lg' type='submit') Check
+    
