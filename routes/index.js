@@ -12,7 +12,7 @@ router.get('/check', function (req, res, next) {
   var check_domain = domain(req.query.domain);
   var locals;
   if (check_domain) {
-    res.render('check', { domain: req.query.domain });
+    res.render('check', { domain: check_domain });
   } else {
     req.session.sessionFlash = {
       type: 'error',
