@@ -3,9 +3,10 @@ extends layout
 block content
   h3(id='checking').
     #[i(class='fa fa-circle-o-notch fa-spin green')]
-    Checking #[span(class='green') !{domain}]
+    Checking #[span(id='domain' class='green') !{domain}]
   br
   ul(id='results', class='fa-ul')
+  //
     li
       i(class='fa-li fa fa-check-square' style='color:green')
       = 'Is the website only served over https?'
