@@ -30,8 +30,11 @@ router.post('/check', function (req, res, next) {
     var check_domain = domain(url);
     if (check_domain) {
       checker(test_index, url, function (err, results) {
-        if (err) res.sendStatus(400);
-        res.json({ description: test_obj.description, results: results });
+        if (err) {
+          res.sendStatus(400);
+        } else {
+          res.json({ description: test_obj.description, results: results });
+        }
       });
     } else {
       res.sendStatus(400);
