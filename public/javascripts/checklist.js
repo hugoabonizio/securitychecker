@@ -2,6 +2,14 @@ var Checklist = (function () {
   var current = 0;
   var stop = false;
   
+  function ok(set, attr) {
+    var result = true;
+    set.forEach(function (i) {
+      if (!i[attr]) result = false;
+    });
+    return result;
+  }
+  
   return {
     run: function (url) {
       var self = this;
@@ -24,12 +32,12 @@ var Checklist = (function () {
         .fail(function (err) { console.log(err.status); callback(err.status, null); });
     },
     append: function (description, results) {
-      console.log(results);
+//       console.log(results);
       // Iterate over results adding 0 + (false|true) and will
       // result in 0 if all values are false, and 1+ if exists
       // any true value
       var icon, color;
-      if (results.reduce(function (prev, curr) { return prev + curr.result }, 0)) {
+      if (ok(results, 'result')) {
         icon = 'fa-check-square';
         color = 'green';
       } else {
@@ -49,6 +57,6 @@ var Checklist = (function () {
 
 $(document).ready(function () {
   if (document.getElementById('checking')) {
-    Checklist.run('www.youtube.com');
+    Checklist.run($('#domain').text());
   }
 });
