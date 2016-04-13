@@ -42,7 +42,7 @@ var Checklist = (function () {
       }
       var element = "<br><li><i class='fa-li fa " + icon + "' style='color:" + color + "'></i> " + description + "<br><br><em>Test:</em><pre>\n";
       results.forEach(function (result) {
-        element += "\n$ " + result.command + "\n" + result.output;
+        element += "$ " + result.command + "\n" + result.output;
       });
       element += "\n</pre></li>";
       document.getElementById('results').innerHTML += element;
