@@ -2,8 +2,8 @@ extends layout
 
 block content
   h3(id='checking').
-    #[i(class='fa fa-circle-o-notch fa-spin green')]
-    Checking #[span(id='domain' class='green') !{domain}]
+    #[i(id='status-icon' class='fa fa-circle-o-notch fa-spin orange')]
+    Checking #[span(id='domain' class='orange') !{domain}]
   br
   ul(id='results', class='fa-ul')
   //

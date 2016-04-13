@@ -9,6 +9,8 @@ a {
  */
 
 .green { color: green; }
+.orange { color: #FF6000; }
+.red { color: red; }
 .col-centered {
     float: none;
     margin: 0 auto;

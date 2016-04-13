@@ -17,7 +17,7 @@ var Checklist = (function () {
         if (!stop) {
           if (err) {
             stop = true;
-            document.body.innerHTML += '<h1>FIM</h1>';
+            document.querySelector('#status-icon').className = 'fa fa-minus-square red';
           } else {
             self.append(data.description, data.results);
             Checklist.run(url);
