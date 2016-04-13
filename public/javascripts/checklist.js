@@ -29,13 +29,9 @@ var Checklist = (function () {
       $
         .post('/check', { url: url, test: i })
         .done(function (results) { callback(null, results); })
-        .fail(function (err) { console.log(err.status); callback(err.status, null); });
+        .fail(function (err) { callback(err.status, null); });
     },
     append: function (description, results) {
-//       console.log(results);
-      // Iterate over results adding 0 + (false|true) and will
-      // result in 0 if all values are false, and 1+ if exists
-      // any true value
       var icon, color;
       if (ok(results, 'result')) {
         icon = 'fa-check-square';
@@ -46,7 +42,6 @@ var Checklist = (function () {
       }
       var element = "<br><li><i class='fa-li fa " + icon + "' style='color:" + color + "'></i> " + description + "<br><br><em>Test:</em><pre>\n";
       results.forEach(function (result) {
-        console.log(result);
         element += "\n$ " + result.command + "\n" + result.output;
       });
       element += "\n</pre></li>";
