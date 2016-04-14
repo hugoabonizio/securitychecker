@@ -42,9 +42,9 @@ var Checklist = (function () {
       }
       var element = "<br><li><i class='fa-li fa " + icon + "' style='color:" + color + "'></i> " + description + "<br><br><em>Test:</em><pre>\n";
       results.forEach(function (result) {
-        element += "$ " + result.command + "\n" + result.output;
+        element += "$ " + result.command + "\n" + result.output + "\n";
       });
-      element += "\n</pre></li>";
+      element += "</pre></li>";
       document.getElementById('results').innerHTML += element;
     }
   };
