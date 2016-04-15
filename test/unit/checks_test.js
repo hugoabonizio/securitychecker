@@ -7,11 +7,11 @@ describe('List', function () {
     describe(test.description, function () {
       test.tests.forEach(function (t) {
         it('should pass valid output', function () {
-          expect(tester(t.expected, t.handler)).to.truthy;
+          expect(tester(t.expect, t.handler)).to.equal(true);
         });
 
         it('should fail invalid output', function () {
-          expect(tester('', t.handler)).to.falsy;
+          expect(tester('', t.handler)).to.equal(false);
         });
       });
     });
