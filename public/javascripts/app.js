@@ -1,5 +1,6 @@
-var Checklist = (function () {
+var Check = (function () {
   var current = 0;
+  var passed = 0;
   var stop = false;
   
   function ok(set, attr) {
@@ -18,9 +19,10 @@ var Checklist = (function () {
           if (err) {
             stop = true;
             document.querySelector('#status-icon').className = 'fa fa-minus-square red';
+            $('#status').text(' Passed ' + passed + '/' + (current - 1));
           } else {
             self.append(data.description, data.results);
-            Checklist.run(url);
+            self.run(url);
           }
         }
       });
@@ -36,6 +38,7 @@ var Checklist = (function () {
       if (ok(results, 'result')) {
         icon = 'fa-check-square';
         color = 'green';
+        passed++;
       } else {
         icon = 'fa-minus-square';
         color = 'red';
@@ -52,6 +55,6 @@ var Checklist = (function () {
 
 $(document).ready(function () {
   if (document.getElementById('checking')) {
-    Checklist.run($('#domain').text());
+    Check.run($('#domain').text());
   }
 });
