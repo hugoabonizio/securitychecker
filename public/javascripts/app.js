@@ -11,6 +11,23 @@ var Check = (function () {
     return result;
   }
   
+  function render_result(passed, total) {
+    var ratio = passed / total;
+    var color, icon;
+    if (ratio > .8) {
+      color = 'green';
+      icon = 'check';
+    } else if (ratio > .65) {
+      color = 'orange';
+      icon = 'check';
+    } else {
+      color = 'red';
+      icon = 'minus-square';
+    }
+    return '<span class="' + color + '">' + passed + '/' + total + '</span>'
+         + '<i class="fa fa-' + icon + ' ' + color + '"></i>';
+  }
+  
   return {
     run: function (url) {
       var self = this;
@@ -18,8 +35,7 @@ var Check = (function () {
         if (!stop) {
           if (err) {
             stop = true;
-            document.querySelector('#status-icon').className = 'fa fa-minus-square red';
-            $('#status').text(' Passed ' + passed + '/' + (current - 1));
+            $('#status').html('Passed ' + render_result(passed, current - 1));
           } else {
             self.append(data.description, data.results);
             self.run(url);
@@ -54,7 +70,7 @@ var Check = (function () {
 })();
 
 $(document).ready(function () {
-  if (document.getElementById('checking')) {
+  if (document.getElementById('status')) {
     Check.run($('#domain').text());
   }
 });
