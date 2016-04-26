@@ -25,7 +25,7 @@ var Check = (function () {
       icon = 'minus-square';
     }
     return '<span class="' + color + '">' + passed + '/' + total + '</span>'
-         + '<i class="fa fa-' + icon + ' ' + color + '"></i>';
+         + ' <i class="fa fa-' + icon + ' ' + color + '"></i>';
   }
   
   return {
@@ -61,7 +61,8 @@ var Check = (function () {
       }
       var element = "<br><li><i class='fa-li fa " + icon + "' style='color:" + color + "'></i> " + description + "<br><br><em>Test:</em><pre>\n";
       results.forEach(function (result) {
-        element += "$ " + result.command + "\n" + result.output + "\n";
+        console.log(result);
+        element += "\t$ " + result.command + "\n\t" + result.output + "\n";
       });
       element += "</pre></li>";
       document.getElementById('results').innerHTML += element;
